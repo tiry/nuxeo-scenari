@@ -1,0 +1,2 @@
+Manifest-Version: 1.0
+Main-Class: eu.scenari.nuxeo.client.shell.Main

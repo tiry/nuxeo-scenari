@@ -1,0 +1,24 @@
+<package type="addon" name="nuxeo-scenari-connector" version="@VERSION@">
+  <title>Scenari Connector plugin for Nuxeo</title>
+  <description>
+    <p>Simple Connector to allow Scenari to publish to Nuxeo.</p>
+  </description>
+  <home-page>https://github.com/tiry/nuxeo-scenari</home-page>
+  <vendor>FICO</vendor>
+  <installer restart="false" />
+  <uninstaller restart="true" />
+  <!-- <hotreload-support>true</hotreload-support> -->
+  <!-- <require-terms-and-conditions-acceptance>false -->
+  <!-- </require-terms-and-conditions-acceptance> -->
+  <nuxeo-validation>nuxeo_certified</nuxeo-validation>
+  <production-state>testing</production-state>
+  <supported>true</supported>
+  <platforms>
+    <platform>cap-5.5</platform>
+  </platforms>
+  <dependencies>
+    <package>nuxeo-content-browser:1.0.0:1.0.0</package>
+  </dependencies>
+  <license>FICO</license>
+  <license-url></license-url>
+</package>

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-Vendor: Nuxeo
+Eclipse-LazyStart: true
+Bundle-ClassPath: .
+Bundle-Name: Scenari Connector plugin for Nuxeo
+Bundle-Localization: bundle
+Bundle-ManifestVersion: 2
+Nuxeo-Component: OSGI-INF/operations-contrib.xml
+Bundle-SymbolicName: org.scenari.connector;singleton:=true
+

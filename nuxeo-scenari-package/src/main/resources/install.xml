@@ -1,0 +1,5 @@
+<install>
+  <!-- because we want a non versioned jar of Studio -->
+  <copy file="${package.root}/install/bundles/FICOCMPOC.jar" todir="${env.bundles}"  overwrite="true" />
+  <update file="${package.root}/install/bundles" todir="${env.bundles}" />
+</install>
