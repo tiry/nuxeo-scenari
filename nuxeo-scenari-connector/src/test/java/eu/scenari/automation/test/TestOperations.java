@@ -3,17 +3,22 @@ package eu.scenari.automation.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.nuxeo.common.utils.FileUtils;
 import org.nuxeo.ecm.automation.AutomationService;
 import org.nuxeo.ecm.automation.OperationChain;
 import org.nuxeo.ecm.automation.OperationContext;
 import org.nuxeo.ecm.automation.OperationParameters;
+import org.nuxeo.ecm.core.api.Blob;
 import org.nuxeo.ecm.core.api.CoreSession;
+import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
+import org.nuxeo.ecm.core.api.impl.blob.FileBlob;
 import org.nuxeo.ecm.core.test.CoreFeature;
 import org.nuxeo.runtime.test.runner.Deploy;
 import org.nuxeo.runtime.test.runner.Features;
@@ -38,31 +43,30 @@ public class TestOperations {
     @Test
     public void shouldADocument() throws Exception {
 
-        if (true) {
-            return;
-        }
         OperationContext ctx = new OperationContext(session);
 
         OperationChain chain = new OperationChain("fakeChain");
 
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("applicationId", "app1");
         OperationParameters oparams = new OperationParameters(PublishFolder.ID,
                 params);
         chain.add(oparams);
-        ;
 
-        String caseId = (String) service.run(ctx, chain);
+        File file = File.createTempFile("nx-test-blob-", ".tmp");
+        FileUtils.writeFile(file, "blob content");
 
-        assertNotNull(caseId);
+        Blob blob = new FileBlob(file);
+
+        oparams.set("file", blob);
+
+        DocumentModel doc = (DocumentModel) service.run(ctx, chain);
+
+        assertNotNull(doc);
 
         // fush
         session.save();
-
-        DocumentModelList docs = session.query("select * from ApplicationCase where fds:applicationId='app1'");
+        DocumentModelList docs = session.query("select * from File where dc:title='Scenari File'");
         assertNotNull(docs);
         assertEquals(1, docs.size());
-        assertEquals(caseId, docs.get(0).getPropertyValue("fcd:caseId"));
     }
-
 }

@@ -39,7 +39,7 @@ public class RemoteNuxeo {
         FileBlob fb = new FileBlob(file);
         fb.setMimeType("application/zip");
 
-        Document doc = (Document) session.newRequest(IMPORT_OP).setInput(fb).execute();
+        Document doc = (Document) session.newRequest(PUBLISH_OP).setInput(fb).execute();
         return doc;
     }
 
